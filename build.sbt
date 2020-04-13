@@ -23,6 +23,7 @@ libraryDependencies ++= Seq(
   guice,
   ws,
   filters,
+  "io.jsonwebtoken"    %  "jjwt"            % "0.9.0",
   "oystr" %% "oystr-scala-commons" % "v1.0-SNAPSHOT",
   "com.jsuereth" %% "scala-arm"  % "2.0",
   "com.chuusai"  %% "shapeless"  % "2.3.3",

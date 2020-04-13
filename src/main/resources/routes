@@ -1,6 +1,6 @@
 # Route to query/delete credentials and certificates.
-GET    /secrets/:organization/:name/:bot/:username/:target  oystr.controllers.SecretsController.dataFor(organization: String, name: String, bot: String, username: String, target: String)
-DELETE /secrets/:organization/:name/:bot/:username/:target  oystr.controllers.SecretsController.deleteDataFor(organization: String, name: String, bot: String, username: String, target: String)
+GET    /secrets/:bot/:username/:target  oystr.controllers.SecretsController.dataFor(bot: String, username: String, target: String)
+DELETE /secrets/:bot/:username/:target  oystr.controllers.SecretsController.deleteDataFor(bot: String, username: String, target: String)
 
 # Request to handle policies, tokens and secrets.
 POST   /policy                                              oystr.controllers.SecretsController.createPolicyFor()

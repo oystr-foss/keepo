@@ -8,6 +8,7 @@ import play.api.{Configuration, Environment}
 
 import scala.concurrent.ExecutionContext
 
+
 trait Services {
     def conf(): Configuration
     def env(): Environment

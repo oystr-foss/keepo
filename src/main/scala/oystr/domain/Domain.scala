@@ -1,23 +1,35 @@
 package oystr.domain
 
+import java.util.Date
+
 import play.api.libs.json.Json
+import play.api.libs.json.Reads.dateReads
+import play.api.libs.json.Writes.dateWrites
+
 
 case class Done(status: Boolean = true)
 case class Error(message: String)
 case class Policy(policy: String)
-case class TokenRequest(ttl: String, policies: Seq[String], meta: TokenMetadata, renewable: Boolean)
-case class TokenMetadata(organization: String, name: String)
+case class TokenRequest(ttl: String, policies: Seq[String], meta: Option[TokenMetadata], renewable: Boolean)
+case class TokenMetadata(organization: Long, name: String)
 
-case class Metadata(organization: String, name: Option[String], bot: Option[String], token: Option[String])
+case class Metadata(organization: Option[Long], name: Option[String], bot: Option[String], token: Option[String])
 case class Content(username: String, password: Option[String], certificate: Option[String])
-case class StoreDataRequest(metadata: Metadata, content: Content)
+case class StoreDataRequest(metadata: Option[Metadata], content: Content)
 
 sealed trait Secrets
 case class Credentials(username: String, password: String) extends Secrets
 case class CredentialsRequest(data: Secrets)
 case class Certificate(username: String, certificate: String) extends Secrets
 
+case class MorbidUser(account: Long, active: Boolean, created: Option[Date], email: String, id: Long, password: Password, `type`: String, username: String)
+case class Password(created: Option[Date], id: Long, method: String, password: String, token: String, user: Long)
+
 object json {
+    val format = "yyyyMMdd'T'HHmmss"
+    implicit val CustomDateWrites = dateWrites(format)
+    implicit val CustomDateReads = dateReads(format)
+
     implicit val MetadataWriter = Json.writes[Metadata]
     implicit val MetadataReader = Json.reads[Metadata]
     implicit val ContentWriter = Json.writes[Content]
@@ -45,4 +57,9 @@ object json {
 
     implicit val StoreDataRequestWriter = Json.writes[StoreDataRequest]
     implicit val StoreDataRequestReads = Json.reads[StoreDataRequest]
+
+    implicit val PasswordWriter = Json.writes[Password]
+    implicit val PasswordReads = Json.reads[Password]
+    implicit val MorbidUserWriter = Json.writes[MorbidUser]
+    implicit val MorbidUserReads = Json.reads[MorbidUser]
 }
