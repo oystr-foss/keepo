@@ -21,6 +21,7 @@ val AkkaPersistenceCassandra = "0.54"
 
 libraryDependencies ++= Seq(
   guice,
+  ws,
   filters,
   "oystr" %% "oystr-scala-commons" % "v1.0-SNAPSHOT",
   "com.jsuereth" %% "scala-arm"  % "2.0",
