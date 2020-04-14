@@ -1,4 +1,4 @@
-FROM oystr-base-java:v1.0
+FROM oystrcombr/oystr-base-java:latest
 MAINTAINER Rafael Silvério - rafael.silverio.it@gmail.com - rafael.silverio@oystr.com.br
 
 LABEL oystr.container.type=oystr-service
