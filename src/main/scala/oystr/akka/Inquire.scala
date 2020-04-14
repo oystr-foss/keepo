@@ -4,6 +4,7 @@ import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
 import scala.concurrent.{Future, Promise}
 
+
 object Inquire {
     def inquire(target: ActorRef)(msg: Any)(implicit system: ActorSystem): Future[Any] = {
         val promise = Promise[Any]

@@ -10,7 +10,7 @@ import play.api.libs.json.Writes.dateWrites
 case class Done(status: Boolean = true)
 case class Error(message: String)
 case class Policy(policy: String)
-case class TokenRequest(ttl: String, policies: Seq[String], meta: Option[TokenMetadata], renewable: Boolean)
+case class TokenRequest(ttl: String, policies: Option[Seq[String]], meta: Option[TokenMetadata], renewable: Boolean)
 case class TokenMetadata(organization: Long, name: String)
 
 case class Metadata(organization: Option[Long], name: Option[String], bot: Option[String], token: Option[String])

@@ -1,5 +1,6 @@
 package oystr.controllers
 
+import akka.actor.ActorSystem
 import javax.inject.{Inject, Singleton}
 import oystr.akka.Inquire.inquire
 import oystr.akka.RootActorsImpl
@@ -7,10 +8,11 @@ import oystr.domain._
 import oystr.domain.json._
 import oystr.services._
 import oystr.utils.Utils._
-import play.api.libs.json.{JsSuccess, JsValue}
+import play.api.Configuration
+import play.api.libs.json._
 import play.api.mvc._
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.util.control.NonFatal
 
 
@@ -18,30 +20,47 @@ import scala.util.control.NonFatal
 class SecretsController @Inject() (
     services: BasicServices,
     actors: RootActorsImpl) extends InjectedController {
-    implicit val ec = services.ec()
-    implicit val sys = services.sys()
-    implicit val configuration = services.conf()
+    implicit val ec: ExecutionContext = services.ec()
+    implicit val sys: ActorSystem = services.sys()
+    implicit val configuration: Configuration = services.conf()
 
     def createPolicyFor: Action[AnyContent] = Action.async { implicit request =>
-        ¬¬ (m => ~> (CreatePolicyFor(Metadata(Some(m.account), None, None, None))), requireVaultToken = false)
+        ¬¬ ({ m =>
+            val metadata = Metadata(Some(m.account), None, None, None)
+            ~> (CreatePolicyFor(metadata))
+
+            Future.successful(Ok(Json.toJson(metadata)))
+        }, requireVaultToken = false)
     }
 
     def createTokenFor: Action[JsValue] = Action.async(parse.json) { implicit request =>
-        request.body.validate[TokenRequest] match {
-            case success: JsSuccess[TokenRequest] =>
-                ¬¬ ({ m =>
-                    val tokenRequest = success.get.copy(meta = Some(TokenMetadata(m.account, m.username)))
+        request.body.validate[TokenRequest] fold (
+            errors => toJsError(errors),
+            valid => {
+                ¬¬({ m =>
+                    val policyName = s"${m.account}-caging-policy"
+                    val tokenRequest = valid
+                        .copy(
+                            policies = Some(Seq(policyName)),
+                            meta = Some(TokenMetadata(m.account, m.username))
+                        )
                     ~>(CreateTokenFor(tokenRequest))
+
+                    Future.successful(Ok(Json.toJson(tokenRequest)))
                 }, requireVaultToken = false)
-        }
+            }
+        )
     }
 
+    private def toJsError(errors: Seq[(JsPath, Seq[JsonValidationError])]): Future[Result] =
+        Future.successful(BadRequest(JsError.toJson(errors)))
+
     def storeCredentialsFor: Action[JsValue] = Action.async(parse.json) { implicit request =>
-        request.body.validate[StoreDataRequest] match {
-            case success: JsSuccess[StoreDataRequest] =>
+        request.body.validate[StoreDataRequest] fold (
+            errors => toJsError(errors),
+            storeDataRequest => {
                 ¬¬ { m =>
                     ~> {
-                        val storeDataRequest = success.get
                         val bot = storeDataRequest.metadata.flatMap(_.bot)
 
                         val metadata = Metadata(Some(m.account), Some(m.username), bot, request.vaultToken())
@@ -54,7 +73,8 @@ class SecretsController @Inject() (
                         }
                     }
                 }
-        }
+            }
+        )
     }
 
     def deleteDataFor(bot: String, username: String, target: String): Action[AnyContent] = Action.async {

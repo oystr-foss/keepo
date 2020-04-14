@@ -25,9 +25,9 @@ class BasicServices @Inject() (
     system: ActorSystem,
     executionContext: ExecutionContext) extends Services {
 
-    override def conf() = configuration
-    override def env() = environment
-    override def clock() = theClock
-    override def sys() = system
-    override def ec() = executionContext
+    override def conf(): Configuration = configuration
+    override def env(): Environment = environment
+    override def clock(): Clock = theClock
+    override def sys(): ActorSystem = system
+    override def ec(): ExecutionContext = executionContext
 }

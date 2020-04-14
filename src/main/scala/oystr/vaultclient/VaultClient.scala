@@ -1,5 +1,6 @@
 package oystr.vaultclient
 
+import akka.stream.scaladsl.Source
 import akka.util.ByteString
 import com.softwaremill.sttp._
 import com.softwaremill.sttp.akkahttp.AkkaHttpBackend
@@ -8,7 +9,7 @@ import oystr.services.BasicServices
 import oystr.utils.Utils._
 import play.api.libs.json.JsValue
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
 import scala.language.postfixOps
 
@@ -25,9 +26,13 @@ trait VaultClient {
 @Singleton
 class SttpVaultClient @Inject() (
     services: BasicServices) extends VaultClient {
-    implicit val ec = services.ec()
-    implicit val backend = AkkaHttpBackend()
-    private val vaultAddr = services.conf().get[String]("vault.address")
+    implicit val ec: ExecutionContext = services.ec()
+    implicit val backend: SttpBackend[Future, Source[ByteString, Any]] = AkkaHttpBackend()
+
+    private val vaultHost = services.conf().get[String]("vault.host")
+    private val vaultPort = services.conf().get[String]("vault.port")
+    private val vaultAddr = s"http://$vaultHost:$vaultPort"
+
     private val vaultHeader = services.conf().get[String]("vault.header")
 
     override def get[T](url: String, token: String, timeout: Duration = 120 seconds)(fn: Reply => T): Future[T] = {

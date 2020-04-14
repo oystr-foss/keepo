@@ -3,6 +3,7 @@ import play.api.http.DefaultHttpFilters
 import play.filters.cors.CORSFilter
 import play.filters.gzip.GzipFilter
 
+
 @Singleton
 class Filters @Inject() (
   cors    : CORSFilter,

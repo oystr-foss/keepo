@@ -26,7 +26,9 @@ object Utils {
 
         def morbid()(implicit configuration: Configuration, ec: ExecutionContext): Future[Option[MorbidUser]] = {
             implicit val backend: SttpBackend[Future, Source[ByteString, Any]] = AkkaHttpBackend()
-            val morbidAddr = configuration.get[String]("morbid.address")
+            val morbidHost = configuration.get[String]("morbid.host")
+            val morbidPort = configuration.get[String]("morbid.port")
+            val morbidAddr = s"http://$morbidHost:$morbidPort"
 
             def toJson(resp: (Int, JsValue)): Option[MorbidUser] = {
                 Option {
@@ -56,7 +58,7 @@ object Utils {
                          requestTo(sttp.get(uri"$morbidAddr/user/token/$token"), None, 120 seconds, toTuple)
                 )
                 fut   <- Option(res map { toJson })
-            } yield (fut) recover {
+            } yield fut recover {
                 case NonFatal(e) => throw e
             }
 
