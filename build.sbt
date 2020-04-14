@@ -8,8 +8,7 @@ updateOptions := updateOptions.value.withLatestSnapshots(true)
 val home = sys.env("HOME")
 
 PlayKeys.devSettings := Seq(
-  "play.server.http.port" -> "9005",
-  "hashicorp.vault.address" -> "127.0.0.1:8200"
+  "play.server.http.port" -> "9005"
 )
 
 resolvers ++= Seq(

@@ -8,6 +8,7 @@ import play.api.Configuration
 
 import scala.concurrent.ExecutionContext
 
+
 trait RootActors {
     def vault: ActorRef
 }

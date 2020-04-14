@@ -14,6 +14,7 @@ import play.api.mvc.Request
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
+import scala.language.postfixOps
 import scala.util.control.NonFatal
 
 
@@ -54,12 +55,12 @@ object Utils {
                 res   <- Option(
                          requestTo(sttp.get(uri"$morbidAddr/user/token/$token"), None, 120 seconds, toTuple)
                 )
-                fut   <- Option(res map { toJson } recover { case NonFatal(e) => println(e.getMessage) ; throw e})
-            } yield (fut)
-
-            maybeUser getOrElse {
-                Future.successful(None)
+                fut   <- Option(res map { toJson })
+            } yield (fut) recover {
+                case NonFatal(e) => throw e
             }
+
+            maybeUser get
         }
 
         def validate(requireVaultToken: Boolean)(implicit configuration: Configuration): Boolean = {

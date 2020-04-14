@@ -1,20 +1,7 @@
 <configuration>
 
     <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel"/>
-    <property name="root" value="${LOGS:-/opt/oystr/vault/shared/logs}"/>
     <timestamp key="timestamp" datePattern="yyyyMMdd'T'HHmmss"/>
-
-    <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
-        <discriminator class="oystr.commons.logging.ByMarkerNameDiscriminator"/>
-        <sift>
-            <appender name="${execution}" class="ch.qos.logback.core.FileAppender">
-                <file>${root}/executions/${markerName}/on-${timestamp}.log</file>
-                <encoder>
-                    <pattern>%date %-5level %-24logger{24} %.20thread | %message%n</pattern>
-                </encoder>
-            </appender>
-        </sift>
-    </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -40,16 +27,8 @@
     <logger name="com.google.api.client.http.HttpTransport"             level="WARN" />
     <logger name="com.datastax.driver.core.ClockFactory"                level="WARN" />
 
-    <logger name="oystr.executionservice.Client" level="INFO" additivity="false">
-        <appender-ref ref="SIFT"/>
-    </logger>
-
-    <logger name="oystr.executionservice.ClientAcceptor" level="INFO" additivity="false">
-        <appender-ref ref="SIFT"/>
-    </logger>
-
-    <logger name="oystr.executionservice.ExecutionSupervisor" level="INFO" additivity="false">
-        <appender-ref ref="SIFT"/>
+    <logger name="oystr.services.VaultActor" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <root level="INFO">

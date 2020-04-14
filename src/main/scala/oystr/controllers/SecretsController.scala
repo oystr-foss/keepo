@@ -11,6 +11,7 @@ import play.api.libs.json.{JsSuccess, JsValue}
 import play.api.mvc._
 
 import scala.concurrent.Future
+import scala.util.control.NonFatal
 
 
 @Singleton
@@ -72,6 +73,7 @@ class SecretsController @Inject() (
                 .morbid()
                 .map { _.head }
                 .flatMap { msg }
+                .recover { case NonFatal(e) => InternalServerError(e.getMessage) }
         } else {
             Future.successful(BadRequest(s"Missing required headers."))
         }

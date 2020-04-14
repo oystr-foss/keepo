@@ -10,6 +10,7 @@ import play.api.libs.json.JsValue
 
 import scala.concurrent.Future
 import scala.concurrent.duration._
+import scala.language.postfixOps
 
 
 trait VaultClient {

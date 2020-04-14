@@ -10,6 +10,7 @@ import play.api.libs.json.{JsValue, Json}
 
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
+import scala.language.postfixOps
 import scala.util.control.NonFatal
 
 

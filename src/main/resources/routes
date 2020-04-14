@@ -3,6 +3,6 @@ GET    /secrets/:bot/:username/:target  oystr.controllers.SecretsController.data
 DELETE /secrets/:bot/:username/:target  oystr.controllers.SecretsController.deleteDataFor(bot: String, username: String, target: String)
 
 # Request to handle policies, tokens and secrets.
-POST   /policy                                              oystr.controllers.SecretsController.createPolicyFor()
-POST   /token                                               oystr.controllers.SecretsController.createTokenFor()
-POST   /secrets                                             oystr.controllers.SecretsController.storeCredentialsFor()
+POST   /policy                          oystr.controllers.SecretsController.createPolicyFor()
+POST   /token                           oystr.controllers.SecretsController.createTokenFor()
+POST   /secrets                         oystr.controllers.SecretsController.storeCredentialsFor()
