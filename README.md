@@ -27,7 +27,7 @@ $ echo 'include "application.conf"' > /opt/keepo/vault/shared/conf/local.conf
 
 Run the container with:
 ```bash
-$ docker run --name keepo -p 9005:9005 -d -v /opt/keepo/vault/shared:/opt/keepo/service/shared oystrcombr/keepo:v1.0
+$ docker run --name keepo -p 9005:9005 -d -v /opt/keepo/vault/shared:/opt/keepo/service/shared oystrcombr/keepo:latest
 ```
 
 ### Making requests

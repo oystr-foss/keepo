@@ -12,6 +12,6 @@ echo "Tagging image with ${DOCKER_TAG}" &&
   docker tag "${name}":"${DOCKER_TAG}" "${project}"/"${name}":"${DOCKER_TAG}"
 
 echo "Pushing image to remote repo" &&
-  $(command -v gcloud) docker -- push "${project}"/"${name}":"${DOCKER_TAG}"
+  docker push "${project}"/"${name}":"${DOCKER_TAG}"
 
 echo "Done"
