@@ -1,9 +1,9 @@
-package oystr.akka
+package keepo.akka
 
 import akka.actor.{ActorRef, Props}
 import javax.inject.{Inject, Singleton}
-import oystr.services.{BasicServices, VaultActor}
-import oystr.vaultclient.SttpVaultClient
+import keepo.services.{BasicServices, VaultActor}
+import keepo.vaultclient.SttpVaultClient
 import play.api.Configuration
 
 import scala.concurrent.ExecutionContext

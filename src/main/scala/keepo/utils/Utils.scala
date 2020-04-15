@@ -1,13 +1,13 @@
-package oystr.utils
+package keepo.utils
 
 import akka.stream.scaladsl.Source
 import akka.util.ByteString
 import com.softwaremill.sttp._
 import com.softwaremill.sttp.akkahttp.AkkaHttpBackend
 import io.jsonwebtoken.Jwts
+import keepo.domain.json._
+import keepo.domain.{Done, MorbidUser}
 import org.apache.commons.lang.StringUtils
-import oystr.domain.json._
-import oystr.domain.{Done, MorbidUser}
 import play.api.Configuration
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.Request

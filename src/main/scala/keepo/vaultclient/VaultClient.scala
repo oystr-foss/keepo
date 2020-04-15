@@ -1,16 +1,16 @@
-package oystr.vaultclient
+package keepo.vaultclient
 
 import akka.stream.scaladsl.Source
 import akka.util.ByteString
 import com.softwaremill.sttp._
 import com.softwaremill.sttp.akkahttp.AkkaHttpBackend
 import javax.inject.{Inject, Singleton}
-import oystr.services.BasicServices
-import oystr.utils.Utils._
+import keepo.services.BasicServices
+import keepo.utils.Utils._
 import play.api.libs.json.JsValue
 
-import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
+import scala.concurrent.{ExecutionContext, Future}
 import scala.language.postfixOps
 
 

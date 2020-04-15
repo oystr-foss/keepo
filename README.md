@@ -1,6 +1,6 @@
-# Oystr Vault
+# Keepo
 
-### Importing the Project
+### Importing the project
 
 Intellij has native support for `sbt` projects. Please, see details [here](https://blog.jetbrains.com/scala/2013/11/18/built-in-sbt-support-in-intellij-idea-13/).
 
@@ -18,16 +18,16 @@ We are working with Docker containers running instances of [Morbid](https://gith
 
 To set up the environment, run the commands below:
 ```bash
-$ sudo mkdir -p /opt/oystr/vault/shared/conf
-$ sudo chown -R $USER. /opt/oystr/
-$ echo 'include "application.conf"' > /opt/oystr/vault/shared/conf/local.conf
+$ sudo mkdir -p /opt/keepo/vault/shared/conf
+$ sudo chown -R $USER. /opt/keepo/
+$ echo 'include "application.conf"' > /opt/keepo/vault/shared/conf/local.conf
 ```
 
 ### Running
 
 Run the container with:
 ```bash
-$ docker run --name oystr-vault-service -p 9005:9005 -d -v /opt/oystr/vault/shared:/opt/oystr/service/shared oystrcombr/oystr-vault-service:v1.0
+$ docker run --name keepo -p 9005:9005 -d -v /opt/keepo/vault/shared:/opt/keepo/service/shared oystrcombr/keepo:v1.0
 ```
 
 ### Making requests

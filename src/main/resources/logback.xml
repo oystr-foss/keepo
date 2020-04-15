@@ -20,7 +20,7 @@
     <!-- Off these ones as they are annoying, and anyway we manage configuration ourselves -->
     <logger name="com.datastax.driver.core.ClockFactory" level="WARN" />
 
-    <logger name="oystr.services.VaultActor" level="INFO" additivity="false">
+    <logger name="keepo.services.VaultActor" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 

@@ -1,4 +1,4 @@
-package oystr.domain
+package keepo.domain
 
 import java.util.Date
 

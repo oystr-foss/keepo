@@ -1,9 +1,9 @@
 import java.time.Clock
 
 import com.google.inject.AbstractModule
-import oystr.akka.{RootActors, RootActorsImpl}
-import oystr.services.{BasicServices, Services}
-import oystr.vaultclient.{SttpVaultClient, VaultClient}
+import keepo.akka.{RootActors, RootActorsImpl}
+import keepo.services.{BasicServices, Services}
+import keepo.vaultclient.{SttpVaultClient, VaultClient}
 
 
 class Module extends AbstractModule {

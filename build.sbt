@@ -1,9 +1,9 @@
 import sbt.Keys._
 
 scalaVersion := "2.12.11"
-name := """oystr-vault"""
+name := """keepo"""
 version := "v1.0-SNAPSHOT"
-maintainer := "rafael.silverio@oystr.com.br"
+maintainer := "rafael.silverio.it@gmail.com"
 
 updateOptions := updateOptions.value.withLatestSnapshots(true)
 
@@ -26,7 +26,6 @@ libraryDependencies ++= Seq(
   guice,
   ws,
   filters,
-  "oystr" %% "oystr-scala-commons" % "v1.0-SNAPSHOT",
   "com.jsuereth" %% "scala-arm"  % "2.0",
   "com.chuusai"  %% "shapeless"  % "2.3.3",
   "commons-io"   %  "commons-io" % "2.6",

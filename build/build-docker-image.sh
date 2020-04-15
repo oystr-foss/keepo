@@ -4,7 +4,7 @@ if [ -d "tmp" ]; then
   rm -rf tmp
 fi
 
-name=oystr-vault-service
+name=keepo
 playSecret=$(head -c 32 /dev/urandom | base64)
 ipAddr=$(ip addr | grep "inet " | grep dynamic | awk '{print $2}' | awk -F"/" '{print $1}' || ifconfig | grep "inet " | grep netmask | grep -v 127.0.0.1 | grep -v 172.\*.\*.1 | awk '{print $2}')
 
@@ -19,7 +19,7 @@ cp Dockerfile tmp
 
 cat << EOF > tmp/run
 #!/usr/bin/env bash
-/opt/oystr/service/bin/run -Dconfig.file=/opt/oystr/service/shared/conf/local.conf -Dplay.http.secret.key="${playSecret}" -Dapp.server.addr="${ipAddr}"
+/opt/"${name}"/service/bin/run -Dconfig.file=/opt/"${name}"/service/shared/conf/local.conf -Dplay.http.secret.key="${playSecret}" -Dapp.server.addr="${ipAddr}"
 EOF
 
 chmod +x tmp/run

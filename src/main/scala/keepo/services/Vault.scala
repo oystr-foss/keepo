@@ -1,11 +1,11 @@
-package oystr.services
+package keepo.services
 
 import akka.actor.{Actor, ActorLogging}
 import javax.inject.Inject
-import oystr.domain._
-import oystr.domain.json._
-import oystr.utils.Utils._
-import oystr.vaultclient.SttpVaultClient
+import keepo.domain.json._
+import keepo.domain._
+import keepo.utils.Utils._
+import keepo.vaultclient.SttpVaultClient
 import play.api.libs.json.{JsValue, Json}
 
 import scala.concurrent.duration._

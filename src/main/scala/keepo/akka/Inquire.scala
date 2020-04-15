@@ -1,4 +1,4 @@
-package oystr.akka
+package keepo.akka
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
