@@ -5,7 +5,7 @@ import akka.util.ByteString
 import com.softwaremill.sttp._
 import com.softwaremill.sttp.akkahttp.AkkaHttpBackend
 import io.jsonwebtoken.Jwts
-import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang.StringUtils
 import oystr.domain.json._
 import oystr.domain.{Done, MorbidUser}
 import play.api.Configuration

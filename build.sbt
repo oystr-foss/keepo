@@ -1,8 +1,10 @@
 import sbt.Keys._
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.11"
 name := """oystr-vault"""
 version := "v1.0-SNAPSHOT"
+maintainer := "rafael.silverio@oystr.com.br"
+
 updateOptions := updateOptions.value.withLatestSnapshots(true)
 
 val home = sys.env("HOME")
@@ -28,6 +30,8 @@ libraryDependencies ++= Seq(
   "com.jsuereth" %% "scala-arm"  % "2.0",
   "com.chuusai"  %% "shapeless"  % "2.3.3",
   "commons-io"   %  "commons-io" % "2.6",
+  "commons-lang" % "commons-lang" % "2.6",
+  "com.typesafe.akka" %% "akka-http" % "10.1.11",
   "com.softwaremill.sttp" %% "core" % "1.3.0",
   "com.softwaremill.sttp" %% "akka-http-backend" % "1.3.0"
 )
