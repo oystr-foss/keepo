@@ -31,4 +31,4 @@ $ docker run --name keepo -p 9005:9005 -d -v /opt/keepo/vault/shared:/opt/keepo/
 ```
 
 ### Making requests
-The service documentation can be found [here](https://documenter.getpostman.com/view/1591099/SzYgQErT).
+The service documentation can be found [here](https://documenter.getpostman.com/view/1591099/Szf3Z9sX?version=latest).
